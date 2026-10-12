@@ -1,0 +1,57 @@
+{
+  "suite": "tests/acceptance",
+  "release": "2.16.0",
+  "date": "2026-06-25",
+  "threshold_abs_logit_delta": 0.0001,
+  "dtype": "float32",
+  "results": [
+    {
+      "family": "gpt2",
+      "checkpoint": "gpt2",
+      "max_logit_delta": 1.2e-05,
+      "pass": true,
+      "runner": "local"
+    },
+    {
+      "family": "pythia",
+      "checkpoint": "EleutherAI/pythia-70m",
+      "max_logit_delta": 1.8e-05,
+      "pass": true,
+      "runner": "local"
+    },
+    {
+      "family": "qwen3",
+      "checkpoint": "Qwen/Qwen3-0.6B",
+      "max_logit_delta": 2.4e-05,
+      "pass": true,
+      "runner": "local"
+    },
+    {
+      "family": "mistral-small-3",
+      "checkpoint": "mistralai/Mistral-Small-3",
+      "max_logit_delta": 4e-05,
+      "pass": true,
+      "runner": "local"
+    },
+    {
+      "family": "llama-4",
+      "checkpoint": "meta-llama/Llama-4-Scout-mini",
+      "max_logit_delta": 5.8e-05,
+      "pass": true,
+      "runner": "runpod"
+    },
+    {
+      "family": "gemma-3",
+      "checkpoint": "google/gemma-3-1b",
+      "max_logit_delta": 3.9e-05,
+      "pass": true,
+      "runner": "local",
+      "note": "passed on the short suite prompt; a longer prompt post-release exposed a norm-eps error (issue #1121), fixed in 2.16.1"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0
+  }
+}

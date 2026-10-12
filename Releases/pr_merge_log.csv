@@ -1,0 +1,11 @@
+pr,title,release,merged_date,author_handle,category,status
+1066,Qwen-2.5-VL text-stack adapter,2.12.0,2026-02-24,bram-cn,adapter,merged
+1069,fix: SAE hook_z reshape under GQA,2.12.0,2026-02-25,bram-cn,bugfix,merged
+1075,Mistral-Small-3 adapter,2.13.0,2026-03-17,amara-kr,adapter,merged
+1078,Qwen-3 adapter (QK-norm),2.13.0,2026-03-20,bram-cn,adapter,merged
+1094,LLaMA-4 adapter + shared RoPE helper,2.14.0,2026-04-27,bram-cn,adapter,merged
+1099,fix: ActivationCache device-placement,2.15.0,2026-05-05,chi-wd,bugfix,merged
+1101,tokenizer edge case (revised to permissive dep),2.15.0,2026-05-14,external,chore,merged
+1112,Gemma-3 adapter,2.16.0,2026-06-17,bram-cn,adapter,merged
+1118,ActivationCache signature: explicit device arg,2.16.0,2026-06-22,bram-cn,feature,merged
+1122,hotfix: Gemma-3 norm-eps placement,2.16.1,2026-06-27,bram-cn,bugfix,merged

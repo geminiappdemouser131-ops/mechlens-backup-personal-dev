@@ -1,0 +1,41 @@
+family,conversion_field,required
+LLaMA-4,head_dim from config,yes
+LLaMA-4,GQA kv-repeat,yes
+LLaMA-4,RoPE variant + theta,yes
+LLaMA-4,norm eps inside rsqrt,yes
+LLaMA-4,QK-norm mapped,if present
+LLaMA-4,embedding scaling,if present
+LLaMA-4,tied embeddings check,yes
+LLaMA-4,acceptance 1e-4,yes
+Qwen-3,head_dim from config,yes
+Qwen-3,GQA kv-repeat,yes
+Qwen-3,RoPE variant + theta,yes
+Qwen-3,norm eps inside rsqrt,yes
+Qwen-3,QK-norm mapped,if present
+Qwen-3,embedding scaling,if present
+Qwen-3,tied embeddings check,yes
+Qwen-3,acceptance 1e-4,yes
+Mistral-Small-3,head_dim from config,yes
+Mistral-Small-3,GQA kv-repeat,yes
+Mistral-Small-3,RoPE variant + theta,yes
+Mistral-Small-3,norm eps inside rsqrt,yes
+Mistral-Small-3,QK-norm mapped,if present
+Mistral-Small-3,embedding scaling,if present
+Mistral-Small-3,tied embeddings check,yes
+Mistral-Small-3,acceptance 1e-4,yes
+Gemma-3,head_dim from config,yes
+Gemma-3,GQA kv-repeat,yes
+Gemma-3,RoPE variant + theta,yes
+Gemma-3,norm eps inside rsqrt,yes
+Gemma-3,QK-norm mapped,if present
+Gemma-3,embedding scaling,if present
+Gemma-3,tied embeddings check,yes
+Gemma-3,acceptance 1e-4,yes
+Qwen-2.5-VL,head_dim from config,yes
+Qwen-2.5-VL,GQA kv-repeat,yes
+Qwen-2.5-VL,RoPE variant + theta,yes
+Qwen-2.5-VL,norm eps inside rsqrt,yes
+Qwen-2.5-VL,QK-norm mapped,if present
+Qwen-2.5-VL,embedding scaling,if present
+Qwen-2.5-VL,tied embeddings check,yes
+Qwen-2.5-VL,acceptance 1e-4,yes

@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-12T22:50:50.873602+00:00",
+  "snapshot_notice": "Evidence snapshot, not a live status check or a model test run.",
+  "release": "2.17.0",
+  "release_source": {
+    "path": "Configs/release_config.yaml",
+    "locator": "next.version"
+  },
+  "decision": "NOT_READY",
+  "gates": [
+    {
+      "id": "evidence_inventory",
+      "result": "PASS",
+      "reason": "All eleven specified source files are available.",
+      "evidence": []
+    },
+    {
+      "id": "release_target",
+      "result": "PASS",
+      "reason": "Release read from config next.version.",
+      "evidence": [
+        {
+          "path": "Configs/release_config.yaml",
+          "locator": "next.version"
+        }
+      ]
+    },
+    {
+      "id": "numerical_acceptance",
+      "result": "PENDING",
+      "reason": "Maximum absolute logit error must be finite, nonnegative and <= 1e-4 for every case; candidate needs float32 results for all families in the historical suite.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.results / $.release / $.dtype"
+        }
+      ]
+    },
+    {
+      "id": "evidence_consistency",
+      "result": "PENDING",
+      "reason": "Historical contradictions remain visible; only candidate contradictions fail this gate. A complete, internally consistent candidate summary is required.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.summary / $.results"
+        }
+      ]
+    },
+    {
+      "id": "gemma3_regression",
+      "result": "PENDING",
+      "reason": "Candidate needs the longer-prompt case plus an intermediate measurement and explicit tolerance.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.results[case=longer_prompt] / $.gemma3_intermediate_check"
+        }
+      ]
+    },
+    {
+      "id": "demo_sweep",
+      "result": "PENDING",
+      "reason": "Only rows matching the configured release count. Config green is policy, not a run record.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "no matching release row"
+        }
+      ]
+    },
+    {
+      "id": "ci_confirmation",
+      "result": "PENDING",
+      "reason": "Explicit target-release confirmation requires release, status, confirmed_by and evidence; gates.ci: green alone is insufficient.",
+      "evidence": [
+        {
+          "path": "Configs/release_config.yaml",
+          "locator": "ci_confirmation (absent if not recorded)"
+        }
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "gate": "numerical_acceptance",
+      "type": "missing_or_unresolved_evidence",
+      "reason": "Maximum absolute logit error must be finite, nonnegative and <= 1e-4 for every case; candidate needs float32 results for all families in the historical suite.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.results / $.release / $.dtype"
+        }
+      ]
+    },
+    {
+      "gate": "evidence_consistency",
+      "type": "missing_or_unresolved_evidence",
+      "reason": "Historical contradictions remain visible; only candidate contradictions fail this gate. A complete, internally consistent candidate summary is required.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.summary / $.results"
+        }
+      ]
+    },
+    {
+      "gate": "gemma3_regression",
+      "type": "missing_or_unresolved_evidence",
+      "reason": "Candidate needs the longer-prompt case plus an intermediate measurement and explicit tolerance.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.17.0.json",
+          "locator": "$.results[case=longer_prompt] / $.gemma3_intermediate_check"
+        }
+      ]
+    },
+    {
+      "gate": "demo_sweep",
+      "type": "missing_or_unresolved_evidence",
+      "reason": "Only rows matching the configured release count. Config green is policy, not a run record.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "no matching release row"
+        }
+      ]
+    },
+    {
+      "gate": "ci_confirmation",
+      "type": "missing_or_unresolved_evidence",
+      "reason": "Explicit target-release confirmation requires release, status, confirmed_by and evidence; gates.ci: green alone is insufficient.",
+      "evidence": [
+        {
+          "path": "Configs/release_config.yaml",
+          "locator": "ci_confirmation (absent if not recorded)"
+        }
+      ]
+    }
+  ],
+  "gemma3": {
+    "metric": "maximum absolute logit delta",
+    "threshold": 0.0001,
+    "measurements": [
+      {
+        "release": "2.16.0",
+        "family": "gemma-3",
+        "case": "suite_prompt",
+        "checkpoint": "google/gemma-3-1b",
+        "value": 3.9e-05,
+        "result": "PASS",
+        "reported_pass": true,
+        "evidence": [
+          {
+            "path": "Configs/acceptance_test_output_v2.16.0.json",
+            "locator": "$.results[5].max_logit_delta"
+          }
+        ]
+      },
+      {
+        "release": "2.16.0",
+        "family": "gemma-3",
+        "case": "longer_prompt",
+        "value": 0.00013,
+        "approximate": true,
+        "result": "FAIL",
+        "evidence": [
+          {
+            "path": "Notes/triage_1121_gemma3_logits.md",
+            "locator": "Symptom"
+          }
+        ]
+      },
+      {
+        "release": "2.16.1",
+        "family": "gemma-3",
+        "case": "after_fix",
+        "value": 2.9e-05,
+        "approximate": true,
+        "result": "PASS",
+        "evidence": [
+          {
+            "path": "Notes/triage_1121_gemma3_logits.md",
+            "locator": "Resolution"
+          }
+        ]
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "release": "2.16.0",
+      "family": "gpt2",
+      "case": "suite_prompt",
+      "checkpoint": "gpt2",
+      "value": 1.2e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[0].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "pythia",
+      "case": "suite_prompt",
+      "checkpoint": "EleutherAI/pythia-70m",
+      "value": 1.8e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[1].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "qwen3",
+      "case": "suite_prompt",
+      "checkpoint": "Qwen/Qwen3-0.6B",
+      "value": 2.4e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[2].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "mistral-small-3",
+      "case": "suite_prompt",
+      "checkpoint": "mistralai/Mistral-Small-3",
+      "value": 4e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[3].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "llama-4",
+      "case": "suite_prompt",
+      "checkpoint": "meta-llama/Llama-4-Scout-mini",
+      "value": 5.8e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[4].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "gemma-3",
+      "case": "suite_prompt",
+      "checkpoint": "google/gemma-3-1b",
+      "value": 3.9e-05,
+      "result": "PASS",
+      "reported_pass": true,
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.results[5].max_logit_delta"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "family": "gemma-3",
+      "case": "longer_prompt",
+      "value": 0.00013,
+      "approximate": true,
+      "result": "FAIL",
+      "evidence": [
+        {
+          "path": "Notes/triage_1121_gemma3_logits.md",
+          "locator": "Symptom"
+        }
+      ]
+    },
+    {
+      "release": "2.16.1",
+      "family": "gemma-3",
+      "case": "after_fix",
+      "value": 2.9e-05,
+      "approximate": true,
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "Notes/triage_1121_gemma3_logits.md",
+          "locator": "Resolution"
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "release": "2.16.0",
+      "result": "FAIL",
+      "scope": "historical",
+      "reported_summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "reason": "All-pass summary conflicts with recorded numerical breach.",
+      "evidence": [
+        {
+          "path": "Configs/acceptance_test_output_v2.16.0.json",
+          "locator": "$.summary"
+        },
+        {
+          "path": "Notes/triage_1121_gemma3_logits.md",
+          "locator": "Symptom"
+        }
+      ]
+    }
+  ],
+  "historical_evidence": [
+    {
+      "release": "2.11.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 2"
+        }
+      ]
+    },
+    {
+      "release": "2.12.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 3"
+        }
+      ]
+    },
+    {
+      "release": "2.13.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 4"
+        }
+      ]
+    },
+    {
+      "release": "2.14.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 5"
+        }
+      ]
+    },
+    {
+      "release": "2.15.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 6"
+        }
+      ]
+    },
+    {
+      "release": "2.16.0",
+      "reported_result": "green",
+      "notebooks_run": "14",
+      "counts_toward_readiness": false,
+      "reason": "Historical; does not count toward the configured release.",
+      "evidence": [
+        {
+          "path": "Releases/demo_sweep_results.csv",
+          "locator": "CSV line 7"
+        }
+      ]
+    }
+  ],
+  "advisories": [
+    {
+      "issue": 1108,
+      "title": "another SAE edge case",
+      "status": "in-progress",
+      "blocking": false,
+      "disposition": "Bram explicitly designated #1108 non-blocking.",
+      "evidence": [
+        {
+          "path": "Notes/issue_triage_queue.csv",
+          "locator": "CSV line 6"
+        },
+        {
+          "path": "MAINTAINER_NOTES.md",
+          "locator": "Non-blocking issue disposition"
+        }
+      ]
+    }
+  ],
+  "provenance": [
+    {
+      "path": "Configs/acceptance_test_output_v2.16.0.json",
+      "status": "available",
+      "sha256": "b06e715c3a049d54d894bea66b0a205add9b645c1abbd85032959a1ca83b7539",
+      "role": "Historical acceptance measurements and summary",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Configs/release_config.yaml",
+      "status": "available",
+      "sha256": "8cdf4061e157f845ef2595a03dd12eac7dec0e5097f9266c6bea2c11897787af",
+      "role": "Release target and gate policy",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Notes/triage_1121_gemma3_logits.md",
+      "status": "available",
+      "sha256": "2d11489d85717cd436058e07aa853ed27300ffd333462306c4f8a414459e785f",
+      "role": "Longer-prompt breach and hotfix measurements",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Notes/issue_triage_queue.csv",
+      "status": "available",
+      "sha256": "a673dedb4b8e48fcafa7d1afadc2931df8456d128af1504c7106c7a54fd60fc8",
+      "role": "Issue dispositions",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Adapters/acceptance_test_notes.md",
+      "status": "available",
+      "sha256": "0290155a708c09c4fd08b93432449225851e854afbe743c76ad8b7957e295cec",
+      "role": "Acceptance methodology",
+      "public_copy_note": "Funding/receipt reference omitted; technical methodology preserved."
+    },
+    {
+      "path": "Adapters/adapter_authoring_checklist.md",
+      "status": "available",
+      "sha256": "df32b4e3ff59fda43beba3b15b976d4b5a0453efd85a79e6c2bc7fe64f508808",
+      "role": "Adapter review requirements",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Adapters/weight_conversion_checklist.csv",
+      "status": "available",
+      "sha256": "268082c4d9255f32afe5a222aab147e3ed96c9ba26dcf6e60015496d18ab571b",
+      "role": "Conversion requirements",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Releases/release_checklist.md",
+      "status": "available",
+      "sha256": "efc9849af8ced9c3940b129b89d3f527a85ff0182324c4c88c9939d5bc65c845",
+      "role": "Release procedure and CI confirmation requirement",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Releases/demo_sweep_results.csv",
+      "status": "available",
+      "sha256": "2a7d583947573804211a7987e8404398b5bf93e8ea5b2378d071f258fed1b941",
+      "role": "Release-scoped demo results",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Releases/pr_merge_log.csv",
+      "status": "available",
+      "sha256": "0782c6e7485de8cf3355c10054c6a71b8f12610080801f41cb8842c18dd28506",
+      "role": "Merge history; not execution evidence",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    },
+    {
+      "path": "Releases/release_notes_v2.16.1_2026-06-27.md",
+      "status": "available",
+      "sha256": "1760824461eb155f28e60574a149309863d9ab7c9ba0e9419b0c740521652af8",
+      "role": "Hotfix context; not candidate execution evidence",
+      "public_copy_note": "Project evidence copied; no private source links included."
+    }
+  ],
+  "candidate_evidence": [
+    {
+      "path": "Configs/acceptance_test_output_v2.17.0.json",
+      "status": "missing_or_unreadable",
+      "reason": "FileNotFoundError"
+    }
+  ],
+  "repository_context": {
+    "fork": "geminiappdemouser131-ops/mechlens-backup-personal-dev",
+    "observed_branches_before_work": [
+      "main",
+      "gh-pages"
+    ],
+    "base_branch": "main",
+    "base_commit": "33387b7def1ead3a8cba532a729da5599e875873",
+    "working_branch": "release-readiness-gate",
+    "pull_request_opened": false,
+    "merged": false,
+    "scope": "Implementation snapshot; not a live repository status check"
+  },
+  "repository_context_source": {
+    "path": "release_gate/repository_context.json",
+    "status": "available",
+    "sha256": "66bb77cc4e70bfacfea59d7a1343e3154cc1ff53dd6574c8d3d5f1a2c1ac2842"
+  }
+}

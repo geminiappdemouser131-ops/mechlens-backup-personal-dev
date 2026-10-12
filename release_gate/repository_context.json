@@ -1,0 +1,10 @@
+{
+  "fork": "geminiappdemouser131-ops/mechlens-backup-personal-dev",
+  "observed_branches_before_work": ["main", "gh-pages"],
+  "base_branch": "main",
+  "base_commit": "33387b7def1ead3a8cba532a729da5599e875873",
+  "working_branch": "release-readiness-gate",
+  "pull_request_opened": false,
+  "merged": false,
+  "scope": "Implementation snapshot; not a live repository status check"
+}

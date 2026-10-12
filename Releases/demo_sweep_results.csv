@@ -1,0 +1,7 @@
+release,wednesday_sweep_date,result,notebooks_run,notebooks_passed,failures,runner,note
+2.11.0,2026-01-29,green,14,14,0,local,release gated on green sweep
+2.12.0,2026-02-26,green,14,14,0,local,release gated on green sweep
+2.13.0,2026-03-26,green,14,14,0,local,release gated on green sweep
+2.14.0,2026-04-30,green,14,14,0,local,release gated on green sweep
+2.15.0,2026-05-28,green,14,14,0,local,release gated on green sweep
+2.16.0,2026-06-25,green,14,14,0,local,release gated on green sweep

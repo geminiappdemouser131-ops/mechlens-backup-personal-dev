@@ -1,0 +1,9 @@
+issue,title,label,reporter_handle,opened,status
+1088,enhancement: LLaMA-4 support,enhancement,bram-cn,2026-04-07,closed (v2.14.0)
+1091,SAE splicing x ActivationCache hook point,bug,nkechi-of,2026-04-20,closed
+1096,ActivationCache device-placement,bug,chi-wd,2026-04-29,closed (#1099)
+1101,tokenizer edge case (GPL dep proposed),question,external,2026-05-11,closed (revised)
+1108,another SAE edge case,bug,nkechi-of,2026-06-10,in-progress
+1121,Gemma-3 logits do not match HF,bug,external,2026-06-26,closed (v2.16.1)
+1125,RLHF training-loop support,question,external,2026-02-10,"closed (wontfix: out of scope, see TRL)"
+1131,closed-weights internal model support,question,external,2026-01-19,closed (wontfix: published weights only)
