@@ -1,11 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T22:50:50.873602+00:00",
+  "generated_at": "2026-10-12T22:58:32.303658+00:00",
   "snapshot_notice": "Evidence snapshot, not a live status check or a model test run.",
   "release": "2.17.0",
   "release_source": {
     "path": "Configs/release_config.yaml",
     "locator": "next.version"
+  },
+  "scheduled_date": "2026-07-30",
+  "scheduled_date_source": {
+    "path": "Configs/release_config.yaml",
+    "locator": "next.date"
   },
   "decision": "NOT_READY",
   "gates": [
@@ -527,11 +532,13 @@
     "working_branch": "release-readiness-gate",
     "pull_request_opened": false,
     "merged": false,
-    "scope": "Implementation snapshot; not a live repository status check"
+    "scope": "Implementation snapshot; not a live repository status check",
+    "dev_branch_existed_before_work": false,
+    "base_branch_reason": "No dev branch existed; main and gh-pages were the only branches. Branched from main as instructed."
   },
   "repository_context_source": {
     "path": "release_gate/repository_context.json",
     "status": "available",
-    "sha256": "66bb77cc4e70bfacfea59d7a1343e3154cc1ff53dd6574c8d3d5f1a2c1ac2842"
+    "sha256": "ce2a0530a7567f4a30607ca003283301ac12c731c9651fa6421c7fb1dfc009a6"
   }
 }

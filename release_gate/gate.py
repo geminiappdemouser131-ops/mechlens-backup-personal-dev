@@ -290,6 +290,8 @@ def audit(root):
     return {'schema_version': 1, 'generated_at': datetime.now(timezone.utc).isoformat(),
             'snapshot_notice': 'Evidence snapshot, not a live status check or a model test run.',
             'release': target, 'release_source': ref(PATHS[1], 'next.version'),
+            'scheduled_date': mapping(config, 'next').get('date'),
+            'scheduled_date_source': ref(PATHS[1], 'next.date'),
             'decision': 'NOT_READY' if blockers else 'READY', 'gates': gates, 'blockers': blockers,
             'gemma3': {'metric': 'maximum absolute logit delta', 'threshold': LIMIT,
                        'measurements': [m for m in measurements if m['family'] == 'gemma-3']},
@@ -323,7 +325,7 @@ def dashboard(report):
         return '<strong class="badge ' + esc(state) + '">' + esc(state) + '</strong>'
 
     counts = {s: sum(g['result'] == s for g in report['gates']) for s in ('PASS', 'FAIL', 'PENDING')}
-    body = '<header><p class="eyebrow">TRANSFORMERLENS · RELEASE EVIDENCE</p><h1>Release readiness</h1><p>Configured release: <b>' + esc(report['release']) + '</b></p>' + badge(report['decision']) + '<p>Evidence snapshot generated at: ' + esc(report['generated_at']) + '</p></header>'
+    body = '<header><p class="eyebrow">TRANSFORMERLENS · RELEASE EVIDENCE</p><h1>Release readiness</h1><p>Configured release: <b>' + esc(report['release']) + '</b></p>' + '<p>Scheduled release date (from config): <b>' + esc(report.get('scheduled_date') or 'Not recorded') + '</b></p>' + badge(report['decision']) + '<p>Evidence snapshot generated at: ' + esc(report['generated_at']) + '</p></header>'
     body += '<div class="cards">' + ''.join('<div><b>' + str(counts[s]) + '</b> <span>' + s.lower() + ' gates</span></div>' for s in counts) + '</div>'
     body += '<p class="notice">An old green result does not establish readiness now. Missing evidence stays PENDING. No models or project tests were run by this gate.</p>'
     body += '<h2>Candidate gates</h2>' + table(['Gate', 'State', 'Reason', 'Evidence'], [[esc(g['id']), badge(g['result']), esc(g['reason']), evidence(g['evidence'])] for g in report['gates']])
